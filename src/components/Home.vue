@@ -40,8 +40,6 @@ export default {
             margin:0 5% 50px 5%;
             width:auto;
             display:flex;
-            /*position:absolute;*/
-            /*top:0;*/
             &__new, &__list, &__mine{
                 flex:1;
                 font-size:16px;
