@@ -26,7 +26,7 @@
                         <el-button type="primary" @click="submitForm('student')">登录</el-button>
                     </div>
                     <p class="login-wrap__box__content__register"
-                       @click="handleCommand()">注册</p>
+                       @click="handleCommand()">新用户注册</p>
                 </el-form>
             </div>
         </div>
@@ -121,46 +121,47 @@ export default {
 
 <style lang="scss" scoped>
     .login{
-        position: absolute;
+        position: fixed;
         top:0;
         left:0;
-        width:100%;
-        height:100%;
-        background: url("../assets/images/bg2.jpeg") no-repeat center;
-        background-size:100% 100%;
+        right:0;
+        bottom:0;
+        background: url("../assets/images/bg2.jpeg") no-repeat;
+        background-size:cover;
         .login-wrap{
-            width:400px;
+            opacity: 1;
+            /*border:2px solid #000;*/
+            width:500px;
             margin:5% auto;
             &__title{
-                margin-bottom:20px;
+                margin:30px 0 10px 0;
                 img{
                     width:120px;
                     border-radius: 50%;
                 }
             }
             &__box{
-                width:100%;
+                width:80%;
+                margin:0 10%;
+                text-align:center;
                 &__content{
                     &__err{
                         span{
                             color:red;
                         }
                     }
-                    width:100%;
-
                     &__btn{
                         text-align:center;
                         .el-button{
-                            width:100%;
+                            width:80%;
                             height:36px;
                         }
                     }
                     &__register{
                         font-size:16px;
                         line-height:20px;
-                        color:#999;
+                        color:#f9f9f9;
                         cursor: pointer;
-                        float:right;
                     }
                 }
             }
@@ -178,7 +179,4 @@ export default {
             float: left;
         }
     }
-</style>
-<style scope>
-
 </style>
