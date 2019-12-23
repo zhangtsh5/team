@@ -20,10 +20,13 @@
 ###### 服务端
 - node.js
 ###### 数据库
-- mysql
+- mysql / mongodb 
 
 # 项目结构目录
 ###### 前端
 # 项目在线预览
 https://zhangtsh5.github.io/team/dist
+
+# 项目截止时间
+2020年 1 月 18 日
 
