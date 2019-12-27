@@ -20,9 +20,13 @@
 ###### 服务端
 - node.js
 ###### 数据库
-- mysql / mongodb 
+- mongodb ,公网地址：47.98.189.209, 端口号：27017
+- 字段说明
 
-# 项目结构目录
+项目编号 | 组长姓名  | 组长学号  | 课程名称  | 项目名称 | 项目描述 | 组员列表
+ ---- | ----- | ----- | ----- | ----- | ----- | ------  
+ id | leaderName  | leaderID | courseName | proName | proDesc | group 
+
 ###### 前端
 # 项目在线预览
 https://zhangtsh5.github.io/team/dist
