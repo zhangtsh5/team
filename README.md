@@ -20,6 +20,7 @@
 ###### 服务端
 - node.js
 ###### 数据库
+<<<<<<< HEAD
 - mongodb ,公网地址：47.98.189.209, 端口号：27017
 - 字段说明
 
@@ -28,8 +29,13 @@
  id | leaderName  | leaderID | courseName | proName | proDesc | members 
 
 
+=======
+- mongoDB
+>>>>>>> dev
 
 ###### 前端
+
+
 # 项目在线预览
 https://zhangtsh5.github.io/team/dist
 
