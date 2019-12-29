@@ -135,7 +135,7 @@
         .login-wrap {
             opacity: 1;
             border:2px solid #f0f0f0;
-            width: 500px;
+            width: 400px;
             margin: 100px auto 0 auto;
             background-color: #F5F6CE;
 

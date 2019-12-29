@@ -93,7 +93,7 @@
 
     .hint {
         border: 1px solid #f0f0f0;
-        margin: 100px 25% 0 25%;
+        margin: 50px 20% 0 20%;
         border-radius: 20px;
         background-color: #60C0FF;
         padding-bottom: 20px;
