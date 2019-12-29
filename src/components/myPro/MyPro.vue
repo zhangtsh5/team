@@ -4,13 +4,14 @@
         <el-table
             :data="testData"
             border
+            height="400"
             style="width: 100%">
 
             <el-table-column
                 align="center"
                 prop="courseName"
                 label="单位名称（课程名）"
-                width="180">
+                width="160">
             </el-table-column>
 
             <el-table-column
@@ -38,14 +39,14 @@
                 align="center"
                 prop="proName"
                 label="项目名称"
-                width="300">
+                width="240">
             </el-table-column>
 
             <el-table-column
                 align="center"
                 prop="group.length"
                 label="小组人数"
-                width="80">
+                width="60">
             </el-table-column>
 
             <el-table-column

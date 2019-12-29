@@ -25,7 +25,7 @@
         <div class="pro-list">
             <el-table
                 :data="testData"
-                height="480"
+                height="400"
                 border
                 style="width: 100%">
 
@@ -33,7 +33,7 @@
                     align="center"
                     prop="courseName"
                     label="单位名称（课程名）"
-                    width="180">
+                    width="160">
                 </el-table-column>
 
                 <el-table-column
@@ -61,7 +61,7 @@
                     align="center"
                     prop="proName"
                     label="项目名称"
-                    width="300">
+                    width="240">
                 </el-table-column>
 
                 <el-table-column
