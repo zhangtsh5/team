@@ -57,9 +57,9 @@
             <el-row>
                 <el-col :span="12">
                     <div>
-                        <el-form-item label="项目密码" prop="pass">
+                        <el-form-item label="项目密码" prop="password">
                             <el-input type="password" placeholder="请输入密码"
-                                      v-model="newPro.pass"
+                                      v-model="newPro.password"
                                       autocomplete="off"></el-input>
                         </el-form-item>
                     </div>
@@ -116,7 +116,7 @@
             const validatePass2 = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('请再次输入密码'))
-                } else if (value !== this.newPro.pass) {
+                } else if (value !== this.newPro.password) {
                     callback(new Error('两次输入密码不一致!'))
                 } else {
                     callback()
@@ -135,7 +135,7 @@
                     date1: '',
                     date2: '',
                     proDesc: '',
-                    pass: '',
+                    password: '',
                     checkPass: ''
                 },
                 rules: {
@@ -168,7 +168,7 @@
                         {type: 'string', required: true, message: '请输入项目描述', trigger: 'change'}
 
                     ],
-                    pass: [
+                    password: [
                         {validator: validatePass, required: true, rigger: 'change'}
                     ],
                     checkPass: [

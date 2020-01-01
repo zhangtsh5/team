@@ -15,6 +15,8 @@
     "babel-polyfill": "^6.23.0",
     "body-parser": "^1.18.2",
     "element-ui": "^2.12.0",
+    "express": "latest",
+    "mongoose": "^5.8.3",
     "mysql": "^2.15.0",
     "vue": "^2.5.2",
     "vue-core-image-upload": "2.1.11",

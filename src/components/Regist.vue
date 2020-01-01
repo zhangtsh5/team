@@ -1,28 +1,39 @@
 <template>
-    <div class="login">
-        <div class="login-wrap">
-            <div class="login-wrap__title">
+    <div class="regist">
+        <div class="regist-wrap">
+            <div class="regist-wrap__title">
                 <img src="../assets/images/logo.png" alt="中山大学logo">
                 <p>中山大学课程项目组队信息管理网站</p>
             </div>
-            <div class="login-wrap__box">
+            <div class="regist-wrap__box">
                 <el-form :model="student" :rules="rules" ref="student" label-width="0px"
-                         class="login-wrap__box__content">
-                    <div v-if="errorInfo" class="login-wrap__box__content__err">
+                         class="regist-wrap__box__content">
+                    <div v-if="errorInfo" class="regist-wrap__box__content__err">
                         <span>{{errInfo}}</span>
                     </div>
                     <el-form-item prop="name">
                         <el-input v-model="student.name" placeholder="账号/学工号"></el-input>
                     </el-form-item>
+
                     <el-form-item prop="password">
                         <el-input type="password" placeholder="密码" v-model="student.password"
                                   @keyup.enter.native="submitForm('student')"></el-input>
                     </el-form-item>
-                    <div class="login-wrap__box__content__btn">
-                        <el-button type="primary" @click="submitForm('student')">登录</el-button>
+
+                    <el-form-item prop="checkPass">
+                        <el-input type="password" placeholder="确认密码" v-model="student.checkPass"
+                                  @keyup.enter.native="submitForm('student')"></el-input>
+                    </el-form-item>
+
+                    <el-form-item prop="validate">
+                        <el-input v-model="student.validate" class="validate-code" placeholder="验证码"></el-input>
+                        <div class="code" @click="refreshCode">
+                            <s-identify :identifyCode="identifyCode"></s-identify>
+                        </div>
+                    </el-form-item>
+                    <div class="regist-wrap__box__content__btn">
+                        <el-button type="primary" @click="submitForm('student')">注册</el-button>
                     </div>
-                    <p class="login-wrap__box__content__register"
-                       @click="handleCommand()">还没有注册？点击注册</p>
                 </el-form>
             </div>
         </div>
@@ -30,14 +41,20 @@
 </template>
 
 <script>
+    import Sidentify from './identify/Identify'
+
     export default {
-        name: 'login',
+        name: 'regist',
         data () {
             return {
+                identifyCodes: '1234567890',
+                identifyCode: '',
                 errorInfo: false,
                 student: {
                     name: '',
-                    password: ''
+                    password: '',
+                    checkPass: '',
+                    validate: ''
                 },
                 rules: {
                     name: [
@@ -45,9 +62,18 @@
                     ],
                     password: [
                         {required: true, message: '请输入密码', trigger: 'change'}
+                    ],
+                    checkPass: [
+                        {required: true, message: '请再次输入密码', trigger: 'change'}
+                    ],
+                    validate: [
+                        {required: true, message: '请输入验证码', trigger: 'change'}
                     ]
                 }
             }
+        },
+        components: {
+            's-identify': Sidentify
         },
         mounted () {
             this.identifyCode = ''
@@ -62,7 +88,7 @@
                         localStorage.setItem('ms_username', self.student.name)
                         localStorage.setItem('ms_user', JSON.stringify(self.student))
                         console.log(JSON.stringify(self.student))
-                        self.$http.post('/api/user/login', JSON.stringify(self.student))
+                        self.$http.post('/api/user/regist', JSON.stringify(self.student))
                             .then((response) => {
                                 console.log(response)
                                 if (response.data === -1) {
@@ -86,14 +112,27 @@
                 })
             },
             handleCommand () {
-                this.$router.replace('/regist')
+                this.$router.push('/register')
+            },
+            randomNum (min, max) {
+                return Math.floor(Math.random() * (max - min) + min)
+            },
+            refreshCode () {
+                this.identifyCode = ''
+                this.makeCode(this.identifyCodes, 4)
+            },
+            makeCode (o, l) {
+                for (let i = 0; i < l; i++) {
+                    this.identifyCode += this.identifyCodes[this.randomNum(0, this.identifyCodes.length)]
+                }
+                console.log(this.identifyCode)
             }
         }
     }
 </script>
 
 <style lang="scss">
-    .login {
+    .regist {
         position: fixed;
         top: 0;
         left: 0;
@@ -102,27 +141,27 @@
         background: url("../assets/images/bg.png") no-repeat;
         background-size: cover;
 
-        .login-wrap {
+        .regist-wrap {
             opacity: 1;
             border:2px solid #f0f0f0;
             width: 500px;
             margin: 100px auto 0 auto;
-            background-color: #F5F6CE;
+            background-color: #e5e3e4;
 
             .el-form-item{
                 margin-bottom:5px;
             }
 
             &__title {
-                height:100px;
+                height:80px;
                 display: flex;
                 align-items: center;
-                padding:0 40px;
+                padding:0 60px;
                 background-color: #CEECF5;
                 margin-bottom:10px;
 
                 img {
-                    width: 60px;
+                    width: 50px;
                     display: inline-block;
                     border-radius: 50%;
                 }
@@ -135,7 +174,7 @@
             }
 
             &__box {
-                margin:20px 10%;
+                margin:0 10%;
                 text-align: center;
 
                 &__content {
@@ -147,6 +186,7 @@
 
                     &__btn {
                         text-align: center;
+                        margin:10px 0 20px 0;
 
                         .el-button {
                             width: 100%;
@@ -154,13 +194,6 @@
                         }
                     }
 
-                    &__register {
-                        font-size: 16px;
-                        line-height: 20px;
-                        color: #f97112;
-                        cursor: pointer;
-                        text-decoration: underline;
-                    }
                 }
             }
         }

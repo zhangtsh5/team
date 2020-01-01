@@ -62,7 +62,7 @@
                             -
                             <span>{{ item.studentName }}</span>
                             <span>
-                                <el-button type="primary" icon="el-icon-delete" class="delete"></el-button>
+                                <el-button type="primary" icon="el-icon-delete" class="delete" plain></el-button>
                             </span>
                         </li>
                     </ul>
@@ -73,7 +73,7 @@
                 align="center"
                 label="操作">
                 <template slot-scope="scope">
-                    <el-button type="primary">添加成员</el-button>
+                    <el-button type="primary" plain>编辑</el-button>
                 </template>
             </el-table-column>
 

@@ -22,6 +22,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
+    headers: {
+      'X-foo': '112233'
+    },
+    inline: true,
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
