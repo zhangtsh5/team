@@ -40,27 +40,32 @@
 
 # 页面逻辑交互
 - 1.输入链接，进入登录页面，未经登录直接输入网站其它路由，都将重定向到登录页面
-<img src="https://img-blog.csdnimg.cn/2020010409222331.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTIzOTg1,size_16,color_FFFFFF,t_70" width="60%" />
+
+![Image text](https://github.com/zhangtsh5/team/blob/master/src/assets/pages/login.png)
+
 
 - 2.数据库为查询到当前登录用户的注册数据，将提示该用户未注册，点击注册，跳转至注册页面，注册成功后，点击返回跳转回登录页面
 
-<img src="https://img-blog.csdnimg.cn/2020010409260546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTIzOTg1,size_16,color_FFFFFF,t_70" width="60%" />
+![Image text](https://github.com/zhangtsh5/team/blob/master/src/assets/pages/regist.png)
+
 
 - 3.登录成功，点击登录按钮，跳转至首页
 
-<img src="https://img-blog.csdnimg.cn/20200104092827247.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTIzOTg1,size_16,color_FFFFFF,t_70" width="60%" />
+![Image text](https://github.com/zhangtsh5/team/blob/master/src/assets/pages/home.png)
+
 
 - 4.点击右上方菜单栏，切换功能，分别是新建项目，项目列表，我的项目，新建项目页面
 
-<img src="https://img-blog.csdnimg.cn/20200104093022833.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTIzOTg1,size_16,color_FFFFFF,t_70" width="60%" />
+![Image text](https://github.com/zhangtsh5/team/blob/master/src/assets/pages/newPro.png)
+
 
 - 5.项目列表页面
 
-<img src="https://img-blog.csdnimg.cn/2020010409334213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTIzOTg1,size_16,color_FFFFFF,t_70" width="60%" />
+![Image text](https://github.com/zhangtsh5/team/blob/master/src/assets/pages/proList.png)
 
 - 6.我的项目页面
 
-<img src="https://img-blog.csdnimg.cn/20200104093421373.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTIzOTg1,size_16,color_FFFFFF,t_70" width="60%" />
+![Image text](https://github.com/zhangtsh5/team/blob/master/src/assets/pages/myPro.png)
 
 
 
