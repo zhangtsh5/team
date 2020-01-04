@@ -49,6 +49,7 @@
                 })
             },
             login () {
+                this.$router.push({path: '/home'})
                 if (!this.username) {
                     this.messageFunc('warning', '用户名不能为空')
                     return
