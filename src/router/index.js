@@ -18,6 +18,10 @@ export default new Router({
             component: Login
         },
         {
+            path: '*', // 其他没有的页面都重定向到 home页面去
+            redirect: '/login'
+        },
+        {
             path: '/regist',
             name: 'Regist',
             component: Regist

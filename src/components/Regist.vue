@@ -6,23 +6,21 @@
                 <p>中山大学课程项目组队信息管理网站</p>
             </div>
             <div class="regist-wrap__box">
-                <el-form :model="student" :rules="rules" ref="student" label-width="0px"
+                <el-form :model="student" ref="form" label-width="0px"
                          class="regist-wrap__box__content">
                     <div v-if="errorInfo" class="regist-wrap__box__content__err">
                         <span>{{errInfo}}</span>
                     </div>
-                    <el-form-item prop="name">
-                        <el-input v-model="student.name" placeholder="账号/学工号"></el-input>
+                    <el-form-item prop="username">
+                        <el-input v-model="student.username" placeholder="账号/学工号"></el-input>
                     </el-form-item>
 
                     <el-form-item prop="password">
-                        <el-input type="password" placeholder="密码" v-model="student.password"
-                                  @keyup.enter.native="submitForm('student')"></el-input>
+                        <el-input type="password" placeholder="密码" v-model="student.password"></el-input>
                     </el-form-item>
 
-                    <el-form-item prop="checkPass">
-                        <el-input type="password" placeholder="确认密码" v-model="student.checkPass"
-                                  @keyup.enter.native="submitForm('student')"></el-input>
+                    <el-form-item prop="repeatPassword">
+                        <el-input type="password" placeholder="确认密码" v-model="student.repeatPassword"></el-input>
                     </el-form-item>
 
                     <el-form-item prop="validate">
@@ -32,8 +30,9 @@
                         </div>
                     </el-form-item>
                     <div class="regist-wrap__box__content__btn">
-                        <el-button type="primary" @click="submitForm('student')">注册</el-button>
+                        <el-button type="primary" @click="regFunc">注册</el-button>
                     </div>
+                    <p @click="back" class="regist-wrap__box__content__back">返回登录</p>
                 </el-form>
             </div>
         </div>
@@ -50,25 +49,12 @@
                 identifyCodes: '1234567890',
                 identifyCode: '',
                 errorInfo: false,
+                isRegSuccess: false,
                 student: {
-                    name: '',
+                    username: '',
                     password: '',
-                    checkPass: '',
+                    repeatPassword: '',
                     validate: ''
-                },
-                rules: {
-                    name: [
-                        {required: true, message: '请输入用户名', trigger: 'change'}
-                    ],
-                    password: [
-                        {required: true, message: '请输入密码', trigger: 'change'}
-                    ],
-                    checkPass: [
-                        {required: true, message: '请再次输入密码', trigger: 'change'}
-                    ],
-                    validate: [
-                        {required: true, message: '请输入验证码', trigger: 'change'}
-                    ]
                 }
             }
         },
@@ -80,39 +66,52 @@
             this.makeCode(this.identifyCodes, 4)
         },
         methods: {
-            submitForm (formName) {
-                this.$router.replace('/home') // 需验证再跳转，此处仅为演示效果
-                const self = this
-                self.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        localStorage.setItem('ms_username', self.student.name)
-                        localStorage.setItem('ms_user', JSON.stringify(self.student))
-                        console.log(JSON.stringify(self.student))
-                        self.$http.post('/api/user/regist', JSON.stringify(self.student))
-                            .then((response) => {
-                                console.log(response)
-                                if (response.data === -1) {
-                                    self.errorInfo = true
-                                    self.errInfo = '该用户不存在'
-                                    console.log('该用户不存在')
-                                } else if (response.data === 0) {
-                                    console.log('密码错误')
-                                    self.errorInfo = true
-                                    self.errInfo = '密码错误'
-                                } else if (response.status === 200) {
-                                    self.$router.push('/readme')
-                                }
-                            }).then((error) => {
-                            console.log(error)
-                        })
+            messageFunc (status, msg) {
+                this.$message({
+                    type: status,
+                    message: msg
+                })
+            },
+            regFunc () {
+                if (!this.student.username) {
+                    this.messageFunc('warning', '用户名不能为空')
+                    return
+                }
+                if (!this.student.password) {
+                    this.messageFunc('warning', '密码不能为空')
+                    return
+                }
+                if (!this.student.validate) {
+                    this.messageFunc('warning', '请输入验证码')
+                    return
+                }
+
+                if (this.student.password.length < 6) {
+                    this.messageFunc('warning', '密码的长度至少6位')
+                    return
+                }
+                if (this.student.repeatPassword !== this.student.password) {
+                    this.messageFunc('warning', '两次输入的密码不同，请重新输入')
+                    return
+                }
+                const obj = {
+                    username: this.student.username,
+                    password: this.student.password
+                }
+                this.$http.post('/reglogin/regist', obj).then((res) => {
+                    if (res.body.code === 0) {
+                        const msg = res.body.msg || '注册成功！！'
+                        this.messageFunc('success', msg)
+                        this.isRegSuccess = true
                     } else {
-                        console.log('error submit!!')
-                        return false
+                        const errorMsg = res.body.errorMsg || '注册失败!!'
+                        this.messageFunc('warning', errorMsg)
+                        this.isRegSuccess = false
                     }
                 })
             },
-            handleCommand () {
-                this.$router.push('/register')
+            back () {
+                this.$router.replace('/')
             },
             randomNum (min, max) {
                 return Math.floor(Math.random() * (max - min) + min)
@@ -192,6 +191,12 @@
                             width: 100%;
                             height: 36px;
                         }
+                    }
+                    &__back{
+                        margin-bottom:10px;
+                        color: #ffa04c;
+                        text-decoration: underline;
+                        cursor: pointer;
                     }
 
                 }

@@ -6,20 +6,19 @@
                 <p>中山大学课程项目组队信息管理网站</p>
             </div>
             <div class="login-wrap__box">
-                <el-form :model="student" :rules="rules" ref="student" label-width="0px"
+                <el-form ref="form" label-width="0px"
                          class="login-wrap__box__content">
-                    <div v-if="errorInfo" class="login-wrap__box__content__err">
-                        <span>{{errInfo}}</span>
-                    </div>
+
                     <el-form-item prop="name">
-                        <el-input v-model="student.name" placeholder="账号/学工号"></el-input>
+                        <el-input v-model="username" placeholder="账号/学工号"></el-input>
                     </el-form-item>
+
                     <el-form-item prop="password">
-                        <el-input type="password" placeholder="密码" v-model="student.password"
-                                  @keyup.enter.native="submitForm('student')"></el-input>
+                        <el-input type="password" placeholder="密码" v-model="password"></el-input>
                     </el-form-item>
+
                     <div class="login-wrap__box__content__btn">
-                        <el-button type="primary" @click="submitForm('student')">登录</el-button>
+                        <el-button type="primary" @click="login">登录</el-button>
                     </div>
                     <p class="login-wrap__box__content__register"
                        @click="handleCommand()">还没有注册？点击注册</p>
@@ -34,19 +33,8 @@
         name: 'login',
         data () {
             return {
-                errorInfo: false,
-                student: {
-                    name: '',
-                    password: ''
-                },
-                rules: {
-                    name: [
-                        {required: true, message: '请输入用户名', trigger: 'change'}
-                    ],
-                    password: [
-                        {required: true, message: '请输入密码', trigger: 'change'}
-                    ]
-                }
+                username: '',
+                password: ''
             }
         },
         mounted () {
@@ -54,34 +42,39 @@
             this.makeCode(this.identifyCodes, 4)
         },
         methods: {
-            submitForm (formName) {
-                this.$router.replace('/home') // 需验证再跳转，此处仅为演示效果
-                const self = this
-                self.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        localStorage.setItem('ms_username', self.student.name)
-                        localStorage.setItem('ms_user', JSON.stringify(self.student))
-                        console.log(JSON.stringify(self.student))
-                        self.$http.post('/api/user/login', JSON.stringify(self.student))
-                            .then((response) => {
-                                console.log(response)
-                                if (response.data === -1) {
-                                    self.errorInfo = true
-                                    self.errInfo = '该用户不存在'
-                                    console.log('该用户不存在')
-                                } else if (response.data === 0) {
-                                    console.log('密码错误')
-                                    self.errorInfo = true
-                                    self.errInfo = '密码错误'
-                                } else if (response.status === 200) {
-                                    self.$router.push('/readme')
-                                }
-                            }).then((error) => {
-                            console.log(error)
-                        })
+            messageFunc (status, msg) {
+                this.$message({
+                    type: status,
+                    message: msg
+                })
+            },
+            login () {
+                if (!this.username) {
+                    this.messageFunc('warning', '用户名不能为空')
+                    return
+                }
+                if (!this.password) {
+                    this.messageFunc('warning', '密码不能为空')
+                    return
+                }
+                const obj = {
+                    username: this.username,
+                    password: this.password
+                }
+                this.$http.post('/reglogin/login', obj).then((res) => {
+                    if (res.body.code === 0) {
+                        // 登录成功
+                        const msg = res.body.msg || '登录成功!!!'
+                        this.messageFunc('success', msg)
+                        setTimeout(() => {
+                            this.$router.replace({
+                                path: '/home'
+                            })
+                        }, 2000)
                     } else {
-                        console.log('error submit!!')
-                        return false
+                        // 登录失败
+                        const errorMsg = res.body.errorMsg || '登录失败'
+                        this.messageFunc('warning', errorMsg)
                     }
                 })
             },

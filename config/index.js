@@ -11,13 +11,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        // '/api': {
-        //     target: 'http://127.0.0.1:3000/api/',
-        //     changeOrigin: true,
-        //     pathRewrite: {
-        //         '^/api': ''
-        //     }
-        // }
+        '/api': {
+            target: 'http://127.0.0.1:3001/api/',
+            changeOrigin: true,
+            pathRewrite: {
+                '^/api': ''
+            }
+        },
       '/user': {
         target: 'http://127.0.0.1:3001',
         changeOrigin: true  // 是否跨域
@@ -36,7 +36,7 @@ module.exports = {
     },
 
     // Various Dev Server settings
-    host: '0.0.0.0', // can be overwritten by process.env.HOST
+    host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
