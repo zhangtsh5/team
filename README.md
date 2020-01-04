@@ -41,31 +41,32 @@
 # 页面逻辑交互
 - 1.输入链接，进入登录页面，未经登录直接输入网站其它路由，都将重定向到登录页面
 
-![Image text](https://github.com/zhangtsh5/team/blob/master/src/assets/pages/login.png)
+<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/login.png" width="70%" />
+
 
 
 - 2.数据库未查询到当前登录用户的注册数据，将提示该用户未注册，点击注册，跳转至注册页面，注册成功后，点击返回跳转回登录页面
 
-![Image text](https://github.com/zhangtsh5/team/blob/master/src/assets/pages/rigist.png)
+<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/rigist.png" width="70%" />
 
 
 - 3.登录成功，点击登录按钮，跳转至首页
 
-![Image text](https://github.com/zhangtsh5/team/blob/master/src/assets/pages/home.png)
+<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/home.png" width="70%" />
 
 
 - 4.点击右上方菜单栏，切换功能，分别是新建项目，项目列表，我的项目，新建项目页面
 
-![Image text](https://github.com/zhangtsh5/team/blob/master/src/assets/pages/newPro.png)
 
+<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/newPro.png" width="70%" />
 
 - 5.项目列表页面
 
-![Image text](https://github.com/zhangtsh5/team/blob/master/src/assets/pages/proList.png)
+<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/proList.png" width="70%" />
 
 - 6.我的项目页面
 
-![Image text](https://github.com/zhangtsh5/team/blob/master/src/assets/pages/myPro.png)
+<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/myPro.png" width="70%" />
 
 
 
