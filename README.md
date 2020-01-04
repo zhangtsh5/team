@@ -44,7 +44,7 @@
 ![Image text](https://github.com/zhangtsh5/team/blob/master/src/assets/pages/login.png)
 
 
-- 2.数据库为查询到当前登录用户的注册数据，将提示该用户未注册，点击注册，跳转至注册页面，注册成功后，点击返回跳转回登录页面
+- 2.数据库未查询到当前登录用户的注册数据，将提示该用户未注册，点击注册，跳转至注册页面，注册成功后，点击返回跳转回登录页面
 
 ![Image text](https://github.com/zhangtsh5/team/blob/master/src/assets/pages/regist.png)
 
