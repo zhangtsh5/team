@@ -46,7 +46,7 @@
 
 - 2.数据库未查询到当前登录用户的注册数据，将提示该用户未注册，点击注册，跳转至注册页面，注册成功后，点击返回跳转回登录页面
 
-![Image text](https://github.com/zhangtsh5/team/blob/master/src/assets/pages/regist.png)
+![Image text](https://github.com/zhangtsh5/team/blob/master/src/assets/pages/rigist.png)
 
 
 - 3.登录成功，点击登录按钮，跳转至首页
