@@ -12,16 +12,18 @@
 ###### 前端
 
  - html, css, javascript
- - vue 全家桶 : vue-cli, vue-router, vue-resource,  axios等
+ - vue 全家桶 : vue-cli, vue-router, axios等
  - UI 框架：Element-UI
  
 
-###### 服务端 node.js
+###### 服务端 
+- node.js, express框架
+
 ###### 数据库 mongodb 目前部署在阿里云服务器
 - 公网地址：47.98.189.209; 
 - 端口号：27017;
 - 数据库名称: team;
-- 表设计：user:用户表(用户登录注册)  proList:项目列表(项目信息增删改查)
+- 表设计：userTable:用户表(用户登录注册)  pros:项目列表(项目信息增删改查)
 - 用户表字段说明
 
 用户名 | 密码
