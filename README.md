@@ -81,9 +81,9 @@ https://zhangtsh5.github.io/team/dist
 - 安装依赖 npm install
 - 启动服务端 
 
- 1、切换目录至服务端 cd server
+ - 切换目录至服务端 cd server
  
- 2、运行 node app.js
+ - 运行 node app.js
  
 - 运行 npm run dev
  
