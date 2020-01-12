@@ -76,3 +76,13 @@ https://zhangtsh5.github.io/team/dist
 # 项目截止时间
 2020年 1 月 18 日
 
+# 本地运行
+- 克隆至本地 git clone
+- 安装依赖 npm install
+- 启动服务端 
+ 1、切换目录至服务端 cd server
+ 2、运行 node app.js
+- 运行 npm run dev
+ 
+
+
