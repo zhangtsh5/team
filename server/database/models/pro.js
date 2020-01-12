@@ -1,17 +1,17 @@
 /*
  定义一个 pro 的Schema
 */
-const mongoose = require('./db.js')
+const mongoose = require('../db.js')
 const Schema = mongoose.Schema
 
 const ProSchema = new Schema({
     leaderName: {type: String}, // 组长姓名
     leaderID: {type: String}, // 组长学号
-    courseName: {type: String}, // 课程名称
+    major: {type: String}, // 专业名
     proName: {type: String}, // 项目名称
     proDesc: {type: String}, // 项目描述
-    date1: {type: String}, // 截止时间 年月日
-    date2: {type: String}, // 截止时间 时分秒
+    maxCount: {type: Number}, // 最大人数限制
+    members: {type: Array}, // 组员信息
     password: {type: String}// 项目密码
 })
 

@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('_express@4.17.1@express')
 
 const router = express.Router()
 

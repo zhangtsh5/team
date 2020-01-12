@@ -25,4 +25,7 @@
         margin: 0;
         padding: 0;
     }
+    body{
+        zoom:0.9;
+    }
 </style>

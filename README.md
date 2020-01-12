@@ -34,7 +34,7 @@
 
 项目编号 | 组长姓名  | 组长学号  | 课程名称  | 项目名称 | 项目描述 | 组员列表
  ---- | ----- | ----- | ----- | ----- | ----- | ------  
- id | leaderName  | leaderID | courseName | proName | proDesc | members 
+ id | leaderName  | leaderID | major | proName | proDesc | members 
 
 
 

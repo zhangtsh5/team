@@ -16,70 +16,68 @@
             </el-col>
             <el-col :span="4">
                 <div class="top-box__print">
-                    <el-button type="primary" plain>打印表格</el-button>
+                    <el-button type="primary" plain>保存并下载excel</el-button>
                 </div>
 
             </el-col>
         </el-row>
-
         <div class="pro-list">
             <el-table
-                :data="testData"
-                height="400"
+                :data="proList"
+                height="500"
                 border
                 style="width: 100%">
 
                 <el-table-column
                     align="center"
-                    prop="courseName"
-                    label="单位名称（课程名）"
-                    width="160">
-                </el-table-column>
-
-                <el-table-column
-                    align="center"
-                    prop="id"
-                    label="项目编号"
-                    width="80">
+                    prop="major"
+                    label="专业"
+                >
                 </el-table-column>
 
                 <el-table-column
                     align="center"
                     prop="leaderName"
                     label="组长姓名"
-                    width="90">
+                    width="80">
                 </el-table-column>
 
                 <el-table-column
                         align="center"
                         prop="leaderID"
                         label="组长学号"
-                        width="90">
+                        width="100"
+                >
                 </el-table-column>
 
                 <el-table-column
                     align="center"
                     prop="proName"
                     label="项目名称"
-                    width="240">
+                >
                 </el-table-column>
 
                 <el-table-column
-                    align="center"
-                    prop="group.length"
-                    label="小组人数"
-                    width="80">
+                        align="center"
+                        prop="maxCount"
+                        label="人数"
+                        width="60"
+                >
                 </el-table-column>
 
                 <el-table-column
-                    align="center"
-                    label="组员信息"
-                    width="180">
+                        align="center"
+                        label="组员信息"
+                        width="180"
+                >
                     <template slot-scope="scope">
                         <ul>
-                            <li v-for="(item, index) in scope.row.group"
-                                :key="index">
-                                {{ item.studentID }} - {{ item.studentName }}
+                            <li
+                                class="pro-members"
+                                :key="index"
+                                v-for="(item, index) in scope.row.members">
+                                <span class="pro-members__id">{{ item.studentID }}</span>
+                                <span class="pro-members__name">{{ item.studentName }}</span>
                             </li>
                         </ul>
                     </template>
@@ -87,459 +85,99 @@
 
                 <el-table-column
                     align="center"
+                    width="160"
                     label="操作">
                     <template slot-scope="scope">
-                        <el-button type="primary" plain>加入该组</el-button>
+                        <el-button size="small" type="primary" plain @click="addMember(scope.row)">添加队友</el-button>
+                        <el-button size="small" type="danger" plain @click="deletePro(scope.row)">删除项目</el-button>
                     </template>
-
                 </el-table-column>
 
             </el-table>
         </div>
+        <join v-if="dialogShow" @watchChild1="getProList"></join>
 
     </div>
 </template>
 
 <script>
+    import Join from '../dialog/Join'
     export default {
         name: 'ProList',
         data () {
             return {
+                proList: [],
                 searchInput: '',
                 select: '',
-                testData: [
-                    {
-                        courseName: '计算机网络实验',
-                        id: '001',
-                        leaderName: '张xx',
-                        leaderID: '12345678',
-                        proName: '网络传输速率研究一',
-                        group: [
-                            {
-                                studentID: '15352001',
-                                studentName: '张三'
-                            },
-                            {
-                                studentID: '15352002',
-                                studentName: '李四'
-                            },
-                            {
-                                studentID: '15352003',
-                                studentName: '王五'
-                            }
-                        ]
-                    },
-                    {
-                        courseName: '计算机网络实验',
-                        id: '002',
-                        leaderName: '张xx',
-                        leaderID: '12345678',
-                        proName: '网络传输速率研究二',
-                        group: [
-                            {
-                                studentID: '15352001',
-                                studentName: '张三'
-                            },
-                            {
-                                studentID: '15352002',
-                                studentName: '李四'
-                            },
-                            {
-                                studentID: '15352003',
-                                studentName: '王五'
-                            }
-                        ]
-                    },
-                    {
-                        courseName: '计算机网络实验',
-                        id: '003',
-                        leaderName: '张xx',
-                        leaderID: '12345678',
-                        proName: '网络传输速率研究三',
-                        group: [
-                            {
-                                studentID: '15352001',
-                                studentName: '张三'
-                            },
-                            {
-                                studentID: '15352002',
-                                studentName: '李四'
-                            },
-                            {
-                                studentID: '15352003',
-                                studentName: '王五'
-                            }
-                        ]
-
-                        // group: [
-                        //   {'15352001': '张三'},
-                        //   {'15352002': '李四'},
-                        //   {'15352003': '王五'},
-                        //   {'15352004': '赵六'}
-                        // ]
-                    },
-                    {
-                        courseName: '计算机网络实验',
-                        id: '004',
-                        leaderName: '张xx',
-                        leaderID: '12345678',
-                        proName: '网络传输速率研究四',
-                        group: [
-                            {
-                                studentID: '15352001',
-                                studentName: '张三'
-                            },
-                            {
-                                studentID: '15352002',
-                                studentName: '李四'
-                            },
-                            {
-                                studentID: '15352003',
-                                studentName: '王五'
-                            }
-                        ]
-                        // group: [
-                        //   {'15352001': '张三'},
-                        //   {'15352002': '李四'},
-                        //   {'15352003': '王五'},
-                        //   {'15352004': '赵六'}
-                        // ]
-                    },
-                    {
-                        courseName: '计算机网络实验',
-                        id: '005',
-                        leaderName: '张xx',
-                        leaderID: '12345678',
-                        proName: '网络传输速率研究一',
-                        group: [
-                            {
-                                studentID: '15352001',
-                                studentName: '张三'
-                            },
-                            {
-                                studentID: '15352002',
-                                studentName: '李四'
-                            },
-                            {
-                                studentID: '15352003',
-                                studentName: '王五'
-                            }
-                        ]
-                        // group: [
-                        //   {'15352001': '张三'},
-                        //   {'15352002': '李四'},
-                        //   {'15352003': '王五'},
-                        //   {'15352004': '赵六'}
-                        // ]
-
-                    },
-                    {
-                        courseName: '计算机网络实验',
-                        id: '006',
-                        leaderName: '张xx',
-                        leaderID: '12345678',
-                        proName: '网络传输速率研究二',
-                        group: [
-                            {
-                                studentID: '15352001',
-                                studentName: '张三'
-                            },
-                            {
-                                studentID: '15352002',
-                                studentName: '李四'
-                            },
-                            {
-                                studentID: '15352003',
-                                studentName: '王五'
-                            }
-                        ]
-                        // group: [
-                        //   {'15352001': '张三'},
-                        //   {'15352002': '李四'},
-                        //   {'15352003': '王五'},
-                        //   {'15352004': '赵六'}
-                        // ]
-                    },
-                    {
-                        courseName: '计算机网络实验',
-                        id: '007',
-                        leaderName: '张xx',
-                        leaderID: '12345678',
-                        proName: '网络传输速率研究三',
-                        group: [
-                            {
-                                studentID: '15352001',
-                                studentName: '张三'
-                            },
-                            {
-                                studentID: '15352002',
-                                studentName: '李四'
-                            },
-                            {
-                                studentID: '15352003',
-                                studentName: '王五'
-                            }
-                        ]
-                        // group: [
-                        //   {'15352001': '张三'},
-                        //   {'15352002': '李四'},
-                        //   {'15352003': '王五'},
-                        //   {'15352004': '赵六'}
-                        // ]
-                    },
-                    {
-                        courseName: '计算机网络实验',
-                        id: '008',
-                        leaderName: '张xx',
-                        leaderID: '12345678',
-                        proName: '网络传输速率研究四',
-                        group: [
-                            {
-                                studentID: '15352001',
-                                studentName: '张三'
-                            },
-                            {
-                                studentID: '15352002',
-                                studentName: '李四'
-                            },
-                            {
-                                studentID: '15352003',
-                                studentName: '王五'
-                            }
-                        ]
-                        // group: [
-                        //   {'15352001': '张三'},
-                        //   {'15352002': '李四'},
-                        //   {'15352003': '王五'},
-                        //   {'15352004': '赵六'}
-                        // ]
-                    },
-                    {
-                        courseName: '计算机网络实验',
-                        id: '009',
-                        leaderName: '张xx',
-                        leaderID: '12345678',
-                        proName: '网络传输速率研究一',
-                        group: [
-                            {
-                                studentID: '15352001',
-                                studentName: '张三'
-                            },
-                            {
-                                studentID: '15352002',
-                                studentName: '李四'
-                            },
-                            {
-                                studentID: '15352003',
-                                studentName: '王五'
-                            }
-                        ]
-                        // group: [
-                        //   {'15352001': '张三'},
-                        //   {'15352002': '李四'},
-                        //   {'15352003': '王五'},
-                        //   {'15352004': '赵六'}
-                        // ]
-
-                    },
-                    {
-                        courseName: '计算机网络实验',
-                        id: '010',
-                        leaderName: '张xx',
-                        leaderID: '12345678',
-                        proName: '网络传输速率研究二',
-                        group: [
-                            {
-                                studentID: '15352001',
-                                studentName: '张三'
-                            },
-                            {
-                                studentID: '15352002',
-                                studentName: '李四'
-                            },
-                            {
-                                studentID: '15352003',
-                                studentName: '王五'
-                            }
-                        ]
-                        // group: [
-                        //   {'15352001': '张三'},
-                        //   {'15352002': '李四'},
-                        //   {'15352003': '王五'},
-                        //   {'15352004': '赵六'}
-                        // ]
-                    },
-                    {
-                        courseName: '计算机网络实验',
-                        id: '011',
-                        leaderName: '张xx',
-                        leaderID: '12345678',
-                        proName: '网络传输速率研究三',
-                        group: [
-                            {
-                                studentID: '15352001',
-                                studentName: '张三'
-                            },
-                            {
-                                studentID: '15352002',
-                                studentName: '李四'
-                            },
-                            {
-                                studentID: '15352003',
-                                studentName: '王五'
-                            }
-                        ]
-                        // group: [
-                        //   {'15352001': '张三'},
-                        //   {'15352002': '李四'},
-                        //   {'15352003': '王五'},
-                        //   {'15352004': '赵六'}
-                        // ]
-                    },
-                    {
-                        courseName: '计算机网络实验',
-                        id: '012',
-                        leaderName: '张xx',
-                        leaderID: '12345678',
-                        proName: '网络传输速率研究四',
-                        group: [
-                            {
-                                studentID: '15352001',
-                                studentName: '张三'
-                            },
-                            {
-                                studentID: '15352002',
-                                studentName: '李四'
-                            },
-                            {
-                                studentID: '15352003',
-                                studentName: '王五'
-                            }
-                        ]
-                        // group: [
-                        //   {'15352001': '张三'},
-                        //   {'15352002': '李四'},
-                        //   {'15352003': '王五'},
-                        //   {'15352004': '赵六'}
-                        // ]
-                    },
-                    {
-                        courseName: '计算机网络实验',
-                        id: '013',
-                        leaderName: '张xx',
-                        leaderID: '12345678',
-                        proName: '网络传输速率研究一',
-                        group: [
-                            {
-                                studentID: '15352001',
-                                studentName: '张三'
-                            },
-                            {
-                                studentID: '15352002',
-                                studentName: '李四'
-                            },
-                            {
-                                studentID: '15352003',
-                                studentName: '王五'
-                            }
-                        ]
-                        // group: [
-                        //   {'15352001': '张三'},
-                        //   {'15352002': '李四'},
-                        //   {'15352003': '王五'},
-                        //   {'15352004': '赵六'}
-                        // ]
-
-                    },
-                    {
-                        courseName: '计算机网络实验',
-                        id: '014',
-                        leaderName: '张xx',
-                        leaderID: '12345678',
-                        proName: '网络传输速率研究二',
-                        group: [
-                            {
-                                studentID: '15352001',
-                                studentName: '张三'
-                            },
-                            {
-                                studentID: '15352002',
-                                studentName: '李四'
-                            },
-                            {
-                                studentID: '15352003',
-                                studentName: '王五'
-                            }
-                        ]
-                        // group: [
-                        //   {'15352001': '张三'},
-                        //   {'15352002': '李四'},
-                        //   {'15352003': '王五'},
-                        //   {'15352004': '赵六'}
-                        // ]
-                    },
-                    {
-                        courseName: '计算机网络实验',
-                        id: '015',
-                        leaderName: '张xx',
-                        leaderID: '12345678',
-                        proName: '网络传输速率研究三',
-                        group: [
-                            {
-                                studentID: '15352001',
-                                studentName: '张三'
-                            },
-                            {
-                                studentID: '15352002',
-                                studentName: '李四'
-                            },
-                            {
-                                studentID: '15352003',
-                                studentName: '王五'
-                            }
-                        ]
-                        // group: [
-                        //   {'15352001': '张三'},
-                        //   {'15352002': '李四'},
-                        //   {'15352003': '王五'},
-                        //   {'15352004': '赵六'}
-                        // ]
-                    },
-                    {
-                        courseName: '计算机网络实验',
-                        id: '016',
-                        leaderName: '张xx',
-                        leaderID: '12345678',
-                        proName: '网络传输速率研究四网络传输速率研究四',
-                        group: [
-                            {
-                                studentID: '15352001',
-                                studentName: '张三'
-                            },
-                            {
-                                studentID: '15352002',
-                                studentName: '李四'
-                            },
-                            {
-                                studentID: '15352003',
-                                studentName: '王五'
-                            }
-                        ]
-                        // group: [
-                        //   {'15352001': '张三'},
-                        //   {'15352002': '李四'},
-                        //   {'15352003': '王五'},
-                        //   {'15352004': '赵六'}
-                        // ]
+                delRow: null,
+                newMember: {
+                    studentName: '',
+                    studentID: ''
+                },
+                dialogShow: false,
+                dialogLabelPosition: 'right',
+                addMemberRow: null
+            }
+        },
+        components: {
+            Join
+        },
+        created () {
+            this.getProList()
+        },
+        methods: {
+            getProList () {
+                const obj = {}
+                this.$http.post('/user/getList', obj).then((res) => {
+                    if (res.data.code === 1) {
+                            this.$message({
+                                message: '请求项目列表失败',
+                                type: 'warning'
+                            })
+                    } else {
+                        this.proList = res.data.list
                     }
-                ]
+                })
+            },
 
+            // 删除项目
+            deletePro (row) {
+                this.$confirm('确认删除当前项目?', '提示', {
+                    confirmButtonText: '确认',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.delRow = row
+                    const obj = {
+                        'id': this.delRow._id
+                    }
+                    this.$http.post('/user/del', obj).then((res) => {
+                        console.log(res.data)
+                        if (Number(res.data.code) === 1) {
+                            this.$message({
+                                message: res.body.errorMsg,
+                                type: 'warning'
+                            })
+                        } else {
+                            this.$message({
+                                message: '删除成功',
+                                type: 'success'
+                            })
+                            this.getProList()
+                        }
+                    })
+                })
+            },
+            // 保存当前项目行
+            addMember (row) {
+                this.dialogShow = true
+                this.addMemberRow = row
             }
         }
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .top-box {
         margin: 0 5%;
         /*border:1px solid blue;*/
@@ -561,7 +199,32 @@
             background-color: #C6E2FF;
         }
     }
+    .el-table th{
+        text-align: center;
+    }
+    .el-table .cell{
+        padding-right: 0;
+    }
+    .operate{
+        width:80px;
+        height:80px;
+        border:1px solid red;
+    }
+    .el-table td, .el-table th{
+        padding: 5px 0;
+    }
 
+    .el-button{
+        /*margin:px 0 !important;*/
+        margin: 0 2px !important;
+    }
+    .el-button--small{
+        border-radius: 5px;
+        padding: 8px 12px;
+        width:70px;
+        font-size: 10px;
+        margin:5px 0;
+    }
     ul, li {
         padding: 0;
         margin: 0;
@@ -570,8 +233,48 @@
 
     .pro-list {
         margin: 10px 5% 0 5%;
-        /*border:2px solid blue;*/
 
+    }
+    .join-dialog {
+        position: absolute;
+        width:360px;
+        left:50%;
+        top:150px;
+        transform: translate(-50%);
+        background-color: #eeeeee;
+        padding: 20px 0 0 0;
+        text-align: center;
+        border-radius: 5px;
+        border: 2px solid #c8c9cc;
+        .el-input__inner{
+            width:120px;
+        }
+        .el-form-item__label{
+            padding: 0;
+        }
+        .el-form-item{
+            margin-bottom:10px;
+        }
+
+    }
+    .pro-members{
+        height:18px;
+        line-height: 18px;
+        position: relative;
+        &__id{
+            display: inline-block;
+            width:70px;
+            height:20px;
+            position: absolute;
+            left:0;
+        }
+        &__name{
+            display: inline-block;
+            width:70px;
+            height:20px;
+            position: absolute;
+            right:0;
+        }
     }
 
 </style>

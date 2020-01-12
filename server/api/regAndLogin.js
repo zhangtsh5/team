@@ -1,4 +1,4 @@
-const UserTable = require('../../server/database/models/userTable')
+const UserTable = require('../database/models/userTable')
 
 // 注册功能
 module.exports.registered = function (req, res, next) {
@@ -14,7 +14,7 @@ module.exports.registered = function (req, res, next) {
         if (err1) {
             return res.send({'code': 1, 'errorMsg': '网络异常错误'})
         } else if (doc1) {
-            return res.send({'code': 1, 'errorMsg': '用户名已经存在'})
+            return res.send({'code': 2, 'errorMsg': '该用户已经存在'})
         } else {
             // 用户注册保存用户
             regUser.save((err2, docs2) => {
@@ -38,9 +38,12 @@ module.exports.login = function (req, res, next) {
         if (err) {
             return res.send({'code': 1, errorMsg: err || '用户名或密码错误'})
         } else {
-            // 登录成功后，把username保存下, 以后的请求通过该session中的username来判断
-            req.session.username = req.body.username
-            return res.send({'code': 0, msg: '登录成功', data: doc})
+            if (doc) {
+                // req.session.username = req.body.username
+                return res.send({'code': 0, msg: '登录成功', data: doc})
+            } else {
+                return res.send({'code': 2, errorMsg: '用户不存在', data: doc})
+            }
         }
     })
     next()

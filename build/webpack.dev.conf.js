@@ -35,14 +35,35 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     hot: true,
     contentBase: false, // since we use CopyWebpackPlugin.
     compress: true,
-    host: HOST || config.dev.host,
-    port: PORT || config.dev.port,
+    host: 'localhost',
+    port: 8080,
     open: config.dev.autoOpenBrowser,
-    overlay: config.dev.errorOverlay
-      ? { warnings: false, errors: true }
-      : false,
+    overlay: true,
     publicPath: config.dev.assetsPublicPath,
-    proxy: config.dev.proxyTable,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000/api', // 域名 这会告诉开发服务器将任何未知请求 (没有匹配到静态文件的请求) 代理到http://localhost:8080
+        changOrigin: true, // 开启代理：在本地会创建一个虚拟服务端，然后发送请求的数据，并同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题
+        pathRewrite: {
+          '^/api': '' // // 替换target中的请求地址，也就是说，在请求的时候，url用'/proxy'代替'http://ip.taobao.com'
+        }
+      },
+      '/user': {
+        target: 'http://localhost:3001',
+        changeOrigin: true  // 是否跨域
+      },
+      '/combineFile': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,  // 是否跨域,
+        pathRewrite: {
+          '^/combineFile' : ''  // 重写路径
+        }
+      },
+      '/reglogin': {
+        target: 'http://localhost:3001',
+        changeOrigin: true  // 是否跨域
+      }
+    },
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,

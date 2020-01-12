@@ -6,10 +6,10 @@
                 <p>中山大学课程项目组队信息管理网站</p>
             </div>
             <div class="regist-wrap__box">
-                <el-form :model="student" ref="form" label-width="0px"
+                <el-form ref="form" label-width="0px"
                          class="regist-wrap__box__content">
                     <div v-if="errorInfo" class="regist-wrap__box__content__err">
-                        <span>{{errInfo}}</span>
+                        <span>{{ errInfo }}</span>
                     </div>
                     <el-form-item prop="username">
                         <el-input v-model="student.username" placeholder="账号/学工号"></el-input>
@@ -23,12 +23,6 @@
                         <el-input type="password" placeholder="确认密码" v-model="student.repeatPassword"></el-input>
                     </el-form-item>
 
-                    <el-form-item prop="validate">
-                        <el-input v-model="student.validate" class="validate-code" placeholder="验证码"></el-input>
-                        <div class="code" @click="refreshCode">
-                            <s-identify :identifyCode="identifyCode"></s-identify>
-                        </div>
-                    </el-form-item>
                     <div class="regist-wrap__box__content__btn">
                         <el-button type="primary" @click="regFunc">注册</el-button>
                     </div>
@@ -40,30 +34,19 @@
 </template>
 
 <script>
-    import Sidentify from './identify/Identify'
 
     export default {
         name: 'regist',
         data () {
             return {
-                identifyCodes: '1234567890',
-                identifyCode: '',
                 errorInfo: false,
                 isRegSuccess: false,
                 student: {
                     username: '',
                     password: '',
-                    repeatPassword: '',
-                    validate: ''
+                    repeatPassword: ''
                 }
             }
-        },
-        components: {
-            's-identify': Sidentify
-        },
-        mounted () {
-            this.identifyCode = ''
-            this.makeCode(this.identifyCodes, 4)
         },
         methods: {
             messageFunc (status, msg) {
@@ -81,11 +64,6 @@
                     this.messageFunc('warning', '密码不能为空')
                     return
                 }
-                if (!this.student.validate) {
-                    this.messageFunc('warning', '请输入验证码')
-                    return
-                }
-
                 if (this.student.password.length < 6) {
                     this.messageFunc('warning', '密码的长度至少6位')
                     return
@@ -99,10 +77,15 @@
                     password: this.student.password
                 }
                 this.$http.post('/reglogin/regist', obj).then((res) => {
-                    if (res.body.code === 0) {
-                        const msg = res.body.msg || '注册成功！！'
+                    if (res.data.code === 2) {
+                        const msg = res.data.errorMsg
+                        this.messageFunc('warning', msg)
+                    } else if (res.data.code === 0) {
+                        const msg = res.msg || '注册成功！！'
                         this.messageFunc('success', msg)
                         this.isRegSuccess = true
+                        console.log(this.isRegSuccess)
+                        this.$router.push('/')
                     } else {
                         const errorMsg = res.body.errorMsg || '注册失败!!'
                         this.messageFunc('warning', errorMsg)
@@ -111,20 +94,8 @@
                 })
             },
             back () {
-                this.$router.replace('/')
-            },
-            randomNum (min, max) {
-                return Math.floor(Math.random() * (max - min) + min)
-            },
-            refreshCode () {
-                this.identifyCode = ''
-                this.makeCode(this.identifyCodes, 4)
-            },
-            makeCode (o, l) {
-                for (let i = 0; i < l; i++) {
-                    this.identifyCode += this.identifyCodes[this.randomNum(0, this.identifyCodes.length)]
-                }
-                console.log(this.identifyCode)
+                this.$emit('toLogin')
+                this.$router.push('/')
             }
         }
     }

@@ -5,7 +5,6 @@
             class="menu-box"
             mode="horizontal"
             router
-            @select="handleSelect"
             background-color="#489cf6"
             text-color="#fff"
             active-text-color="#ffd04b">
@@ -25,10 +24,10 @@
                         <p>如果您有自己的想法，可以点击右上方菜单-新建项目，填写相关项目信息，建立一组</p>
                     </li>
                     <li>
-                        <p>如果您暂时没有什么想法，可以点击右上方菜单-项目列表，查看已有的项目组队情况，选择您喜欢的队伍，联系该队伍的组长获取到该项目的密码，点击加入该组按钮，输入项目密码进行加入操作</p>
+                        <p>如果您暂时没有什么想法，可以点击右上方菜单-项目列表，查看已有的项目组队情况，选择您喜欢的队伍，联系该队伍的组长获取到该项目的密码，点击加入该组按钮，输入项目密码进行加入该组</p>
                     </li>
                     <li>
-                        <p>点击右上方菜单-我的项目，可以查看您加入的或者创建的项目组队情况</p>
+                        <p>点击右上方菜单-我的项目，可以查看您创建的项目</p>
                     </li>
                 </ul>
             </div>
@@ -47,11 +46,14 @@
                 isHintShow: true
             }
         },
-
+        mounted () {
+            if (String(this.$route.path) !== '/home') {
+                this.isHintShow = false
+            } else {
+                this.isHintShow = true
+            }
+        },
         methods: {
-            handleSelect (key, keyPath) {
-                console.log(key, keyPath)
-            },
             hideHint () {
                 this.isHintShow = false
             }
@@ -77,8 +79,6 @@
             width:70%;
             display: flex;
             align-items: center;
-            font-size: 20px;
-            /*margin-right: 50px;*/
 
             img {
                 width: 50px;

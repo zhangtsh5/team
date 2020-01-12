@@ -29,16 +29,16 @@
 
             <el-row>
                 <el-col :span="12">
-                    <el-form-item label="课程名称" prop="courseName">
-                        <el-input v-model="newPro.courseName"></el-input>
+                    <el-form-item label="专业" prop="major">
+                        <el-input v-model="newPro.major"></el-input>
                     </el-form-item>
 
                 </el-col>
 
                 <el-col :span="12">
                     <div>
-                        <el-form-item label="项目人数限制" prop="groupCount">
-                            <el-input v-model="newPro.groupCount"></el-input>
+                        <el-form-item label="项目人数限制" prop="maxCount">
+                            <el-input v-model="newPro.maxCount"></el-input>
                         </el-form-item>
                     </div>
                 </el-col>
@@ -75,22 +75,6 @@
                 </el-col>
             </el-row>
 
-            <el-form-item label="截止时间" required>
-                <el-col :span="6">
-                    <el-form-item prop="date1">
-                        <el-date-picker type="date" placeholder="选择日期" v-model="newPro.date1"
-                                        style="width: 100%;"></el-date-picker>
-                    </el-form-item>
-                </el-col>
-                <el-col class="line" :span="1" style='{text-align:center}'>-</el-col>
-                <el-col :span="6">
-                    <el-form-item prop="date2">
-                        <el-time-picker placeholder="选择时间" v-model="newPro.date2"
-                                        style="width: 100%;"></el-time-picker>
-                    </el-form-item>
-                </el-col>
-            </el-form-item>
-
             <el-form-item class="create-wrap__btn">
                 <el-button type="primary" @click="submitForm('newPro')">立即创建</el-button>
                 <el-button type="danger" @click="resetForm('newPro')">重置输入</el-button>
@@ -103,7 +87,7 @@
     export default {
         name: 'NewPro',
         data () {
-            const validatePass = (rule, value, callback) => {
+            var validatePass = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('请输入密码'))
                 } else {
@@ -113,7 +97,7 @@
                     callback()
                 }
             }
-            const validatePass2 = (rule, value, callback) => {
+            var validatePass2 = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('请再次输入密码'))
                 } else if (value !== this.newPro.password) {
@@ -122,19 +106,17 @@
                     callback()
                 }
             }
-
             return {
-
                 labelPosition: 'right',
+                dialogVisible: false,
                 newPro: {
                     leaderName: '',
                     leaderID: '',
-                    groupCount: '',
-                    courseName: '',
+                    maxCount: '',
+                    major: '',
                     proName: '',
-                    date1: '',
-                    date2: '',
                     proDesc: '',
+                    members: [],
                     password: '',
                     checkPass: ''
                 },
@@ -143,25 +125,16 @@
                         {type: 'string', required: true, trigger: 'change'}
                     ],
                     leaderID: [
-                        {type: 'number', required: true, message: '请输入组长学号', trigger: 'change'}
-
+                        {type: 'string', required: true, message: '请输入组长学号', trigger: 'change'}
                     ],
-                    courseName: [
-                        {type: 'string', required: true, message: '请输入课程名', trigger: 'change'}
+                    major: [
+                        {type: 'string', required: true, message: '请输入专业名', trigger: 'change'}
                     ],
-                    groupCount: [
-                        {type: 'number', required: true, trigger: 'change'}
+                    maxCount: [
+                        {type: 'string', required: true, trigger: 'change'}
                     ],
                     proName: [
                         {type: 'string', required: true, message: '请输入项目名称', trigger: 'change'}
-
-                    ],
-                    data1: [
-                        {type: 'string', required: true, trigger: 'change'}
-
-                    ],
-                    data2: [
-                        {type: 'string', required: true, trigger: 'change'}
 
                     ],
                     proDesc: [
@@ -169,12 +142,11 @@
 
                     ],
                     password: [
-                        {validator: validatePass, required: true, rigger: 'change'}
+                        { validator: validatePass, trigger: 'change' }
                     ],
                     checkPass: [
-                        {validator: validatePass2, required: true, trigger: 'change'}
+                        { validator: validatePass2, trigger: 'change' }
                     ]
-
                 }
             }
         },
@@ -182,15 +154,56 @@
             submitForm (formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        alert('submit!')
+                        this.$confirm('确认提交项目信息?', '提示', {
+                            confirmButtonText: '确认',
+                            cancelButtonText: '取消',
+                            type: 'warning'
+                        }).then(() => {
+                            let params = {
+                                leaderName: this.newPro.leaderName,
+                                leaderID: this.newPro.leaderID,
+                                major: this.newPro.major,
+                                proName: this.newPro.proName,
+                                members: this.newPro.members,
+                                maxCount: this.newPro.maxCount,
+                                proDesc: this.newPro.proDesc,
+                                password: this.newPro.password
+                            }
+                            this.$http.post('/user/add', params).then((res) => {
+                                    console.log(111)
+                                    console.log(res)
+                                    if (res.data.code === 0) {
+                                        this.$message({
+                                            message: '提交成功,可前往项目列表查看',
+                                            type: 'success'
+                                        })
+                                        // 成功后，触发重新查询下数据
+                                        // this.query()
+                                    } else {
+                                        this.$message({
+                                            message: res.data.errorMsg,
+                                            type: 'warning'
+                                        })
+                                    }
+                                    this.dialogVisible = false
+                                }
+                            )
+                        })
                     } else {
-                        console.log('error submit!!')
+                        console.log('输入格式错误!!')
                         return false
                     }
                 })
             },
+            // 清空表单
             resetForm (formName) {
-                this.$refs[formName].resetFields()
+                this.$confirm('此操作将情况所有输入框中内容?', '确认清除？', {
+                    confirmButtonText: '确认',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$refs[formName].resetFields()
+                })
             }
         }
     }

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import MyPro from '../components/myPro/MyPro' // 我的项目
 import NewPro from '../components/newPro/NewPro' // 新建列表
 import ProList from '../components/proList/ProList' // 项目列表
+
 import Home from '../components/Home'
 import Login from '../components/Login'
 import Regist from '../components/Regist'
@@ -26,7 +27,6 @@ export default new Router({
             name: 'Regist',
             component: Regist
         },
-
         {
             path: '/home',
             name: 'Home',
