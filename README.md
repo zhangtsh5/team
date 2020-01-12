@@ -33,15 +33,10 @@
 - 项目列表字段说明
 
 
-<<<<<<< HEAD
-项目编号 | 组长姓名  | 组长学号  | 课程名称  | 项目名称 | 项目描述 | 组员列表
- ---- | ----- | ----- | ----- | ----- | ----- | ------  
- id | leaderName  | leaderID | major | proName | proDesc | members 
-=======
+
 项目编号 | 组长姓名  | 组长学号  | 人数限制  | 专业  | 项目名称 | 项目描述 | 组员列表
  ---- | ----- | ----- | ----- | ----- | ----- | ----- | ------  
  _id | leaderName  | leaderID | maxCount | major | proName | proDesc | members 
->>>>>>> 0597c8be7db895a306aca2f0e84fe9dca729d3ae
 
 
 
