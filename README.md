@@ -40,35 +40,25 @@
 
 
 # 页面逻辑交互
-- 1.输入链接，进入登录页面，未经登录直接输入网站其它路由，都将重定向到登录页面
-
-<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/login.png" width="70%" />
-
-
-
-- 2.数据库未查询到当前登录用户的注册数据，将提示该用户未注册，点击注册，跳转至注册页面，注册成功后，点击返回跳转回登录页面
-
-<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/rigist.png" width="70%" />
-
-
-- 3.登录成功，点击登录按钮，跳转至首页
-
-<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/home.png" width="70%" />
-
-
-- 4.点击右上方菜单栏，切换功能，分别是新建项目，项目列表，我的项目，新建项目页面
-
-
-<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/newPro.png" width="70%" />
-
-- 5.项目列表页面
-
-<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/proList.png" width="70%" />
-
-- 6.我的项目页面
-
-<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/myPro.png" width="70%" />
-
+联系具体实际后，实现以下功能
+1、用户注册登录：
+- 一个学号只能注册一次
+- cookie登录状态保存，有效期内第二次登录密码用户名密码自动填充上一次登录的用户名和密码
+- 未注册用户不能登录
+2、新建项目
+- 输入表单信息，新建项目将自动更新到项目列表，自己新建的项目将同时更新到我的项目列表
+- 每个人只能出现在一个项目中
+3、添加组员
+- 选择任意一组，且自己还没有存在于任何一个其它项目中，点击添加组员按钮，输入姓名和学号以及项目密码，密码正确即可加入该组
+- 当一组项目组员人数到达该组设定的人数上限后，不再允许添加进该组
+4、删除项目
+- 当需要改动自己的项目信息情况时，在项目列表中，找到需要改动信息的项目，点击删除项目按钮，弹出危险提示，确认删除即可删除，然后再去新建项目页面重新输入表单信息，提交改动后的项目信息
+- 只有一组的组长有权限删除项目列表中该组长创建的项目
+5、删除组员
+- 去到我的项目界面，这是是自己创建的项目，也就是说只有自己是组长的项目才会出现我的项目列表，只有组长有权限删除自己组的组员
+6、登录拦截 （此功能尚有小问题，git版本中暂未提交，不影响测试）
+- 用户未登录直接输入首页链接，将进行登录拦截，重定向到登录页面，即只有登录后才能到达首页
+7、将表格信息保存至excel中并下载（此功能暂未实现）
 
 
 # 项目在线预览
