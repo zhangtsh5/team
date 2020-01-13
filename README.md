@@ -33,15 +33,10 @@
 - 项目列表字段说明
 
 
-<<<<<<< HEAD
-项目编号 | 组长姓名  | 组长学号  | 课程名称  | 项目名称 | 项目描述 | 组员列表
- ---- | ----- | ----- | ----- | ----- | ----- | ------  
- id | leaderName  | leaderID | major | proName | proDesc | members 
-=======
+
 项目编号 | 组长姓名  | 组长学号  | 人数限制  | 专业  | 项目名称 | 项目描述 | 组员列表
  ---- | ----- | ----- | ----- | ----- | ----- | ----- | ------  
  _id | leaderName  | leaderID | maxCount | major | proName | proDesc | members 
->>>>>>> 0597c8be7db895a306aca2f0e84fe9dca729d3ae
 
 
 
@@ -80,4 +75,17 @@ https://zhangtsh5.github.io/team/dist
 
 # 项目截止时间
 2020年 1 月 18 日
+
+# 本地运行
+- 克隆至本地 git clone
+- 安装依赖 npm install
+- 启动服务端 
+
+ - 切换目录至服务端 cd server
+ 
+ - 运行 node app.js
+ 
+- 运行 npm run dev
+ 
+
 
