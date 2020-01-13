@@ -76,7 +76,6 @@
                     label="操作">
                     <template slot-scope="scope">
                         <el-button size="small" type="primary" plain @click="addMember(scope.row)">添加队友</el-button>
-                        <el-button size="small" type="danger" plain @click="deletePro(scope.row)">删除项目</el-button>
                     </template>
                 </el-table-column>
 
@@ -127,34 +126,6 @@
                 })
             },
 
-            // 删除项目
-            deletePro (row) {
-                this.$confirm('确认删除当前项目?', '提示', {
-                    confirmButtonText: '确认',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                }).then(() => {
-                    this.delRow = row
-                    const obj = {
-                        'id': this.delRow._id
-                    }
-                    this.$http.post('/user/del', obj).then((res) => {
-                        console.log(res.data)
-                        if (Number(res.data.code) === 1) {
-                            this.$message({
-                                message: res.body.errorMsg,
-                                type: 'warning'
-                            })
-                        } else {
-                            this.$message({
-                                message: '删除成功',
-                                type: 'success'
-                            })
-                            this.getProList()
-                        }
-                    })
-                })
-            },
             // 保存当前项目行
             addMember (row) {
                 this.dialogShow = true
