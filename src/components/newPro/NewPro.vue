@@ -172,7 +172,13 @@
                             this.$http.post('/user/add', params).then((res) => {
                                     console.log(111)
                                     console.log(res)
-                                    if (res.data.code === 0) {
+                                    // 一个学号只能创建一个项目
+                                    if (Number(res.data.code) === 2) {
+                                        this.$message({
+                                            message: res.data.errorMsg,
+                                            type: 'warning'
+                                        })
+                                    } else if (res.data.code === 0) {
                                         this.$message({
                                             message: '提交成功,可前往项目列表查看',
                                             type: 'success'

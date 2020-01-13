@@ -12,11 +12,18 @@ module.exports.add = function (req, res, next) {
         proDesc: req.body.proDesc,
         password: req.body.password
     })
-    pro.save((err, docs) => {
-        if (err) {
-            res.send({'code': 1, 'errorMsg': '新增失败'})
+
+    Pro.findOne({'leaderID': pro.leaderID}, (err1, doc1) => {
+        if (doc1) {
+            res.send({'code': 2, 'errorMsg': '抱歉，您只能创建一个项目'})
         } else {
-            res.send({'code': 0, 'message': '新增成功'})
+            pro.save((err, docs) => {
+                if (err) {
+                    res.send({'code': 1, 'errorMsg': '新增失败'})
+                } else {
+                    res.send({'code': 0, 'message': '新增成功'})
+                }
+            })
         }
     })
     next()

@@ -1,22 +1,9 @@
 <template>
     <div>
         <el-row class="top-box">
-            <el-col :span="20">
-                <div>
-                    <el-input placeholder="请输入内容" v-model="searchInput">
-                        <el-select v-model="select" slot="prepend" placeholder="请选择" class="top-box__option">
-                            <el-option class="top-box__option__1" label="项目编号" value="1"></el-option>
-                            <el-option class="top-box__option__2" label="组长姓名" value="2"></el-option>
-                        </el-select>
-                        <el-button type="primary" class="top-box__btn" slot="append" icon="el-icon-search">搜索
-                        </el-button>
-                    </el-input>
-                </div>
-
-            </el-col>
             <el-col :span="4">
                 <div class="top-box__print">
-                    <el-button type="primary" plain>保存并下载excel</el-button>
+                    <el-button size="small" type="primary" plain>保存至excel</el-button>
                 </div>
 
             </el-col>
@@ -192,7 +179,12 @@
             }
         }
         &__print{
-            text-align:right;
+            text-align:center;
+            position: absolute;
+            right:0;
+            .el-button--primary.is-plain{
+                padding: 5px 10px !important;
+            }
         }
 
         &__btn:hover, &__option:hover {
@@ -232,7 +224,7 @@
     }
 
     .pro-list {
-        margin: 10px 5% 0 5%;
+        margin: 30px 5% 0 5%;
 
     }
     .join-dialog {
