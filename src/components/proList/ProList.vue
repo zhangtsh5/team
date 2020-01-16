@@ -3,7 +3,7 @@
         <el-row class="top-box">
             <el-col :span="4">
                 <div class="top-box__print">
-                    <el-button size="small" type="primary" plain>保存至excel</el-button>
+                    <el-button size="small" type="primary" plain @click="exportToExcel">下载表格</el-button>
                 </div>
 
             </el-col>
@@ -130,6 +130,23 @@
             addMember (row) {
                 this.dialogShow = true
                 this.addMemberRow = row
+            },
+            exportToExcel () {
+                // excel数据导出
+                require.ensure([], () => {
+                    const {
+                        // eslint-disable-next-line camelcase
+                        export_json_to_excel
+                    } = require('../../assets/js/Export2Excel')
+                    const tHeader = ['专业', '组长姓名', '组长学号', '项目名称']
+                    const filterVal = ['major', 'leaderName', 'leaderID', 'proName']
+                    const list = this.proList
+                    const data = this.formatJson(filterVal, list)
+                    export_json_to_excel(tHeader, data, '项目列表excel')
+                })
+            },
+            formatJson (filterVal, jsonData) {
+                return jsonData.map(v => filterVal.map(j => v[j]))
             }
         }
     }
