@@ -35,7 +35,7 @@
 
 
 项目编号 | 组长姓名  | 组长学号  | 人数限制  | 专业  | 项目名称 | 组员列表
- ---- | ----- | ----- | ----- | ----- | ----- | ----- | ------  
+ ---- | ----- | ----- | ----- | ----- | ----- | ------  
  _id | leaderName  | leaderID | maxCount | major | taskName | members 
  
  
@@ -48,7 +48,7 @@
 
 
 # 页面逻辑交互
-联系具体实际后，实现以下功能，流程如下：
+
 
 <img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/process.png" width="80%" />
 
