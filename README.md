@@ -50,7 +50,7 @@
 # 页面逻辑交互
 
 
-<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/logic.png" width="80%" />
+<img src="https://github.com/zhangtsh5/team/blob/master/client/src/assets/pages/logic.png" width="80%" />
 
 ##### 实现功能（按页面操作流程顺序）
 
