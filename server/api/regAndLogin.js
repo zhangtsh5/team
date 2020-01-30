@@ -36,13 +36,13 @@ module.exports.login = function (req, res, next) {
     // 判断用户名和密码是否和数据库的相同
     UserTable.findOne({username: username, password: password}, (err, doc) => {
         if (err) {
-            return res.send({'code': 1, errorMsg: err || '用户名或密码错误'})
+            return res.send({'code': 1, errorMsg: err || '网络异常错误'})
         } else {
             if (doc) {
                 // req.session.username = req.body.username
                 return res.send({'code': 0, msg: '登录成功', data: doc})
             } else {
-                return res.send({'code': 2, errorMsg: '用户不存在', data: doc})
+                return res.send({'code': 2, errorMsg: '用户名或密码错误', data: doc})
             }
         }
     })

@@ -12,8 +12,10 @@ app.use(bodyParser.json())
 // 解析application/X-www-form-urllencoded
 app.use(bodyParser.urlencoded({extended: false}))
 
-const addAndDelete = require('./routes/proOperate')
+const addAndDelete = require('./routes/groupOperate')
 const regAndLogin = require('./routes/regAndLogin')
+const getTask = require('./routes/taskOperate')
+
 
 const fs = require('fs')
 const path = require('path')
@@ -30,6 +32,7 @@ app.use(morgan({
 // 使用
 app.use('/user', addAndDelete)
 app.use('/reglogin', regAndLogin)
+app.use('/task', getTask)
 
 let MIME = {
     '.css': 'text/css',
