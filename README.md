@@ -50,7 +50,7 @@
 # 页面逻辑交互
 
 
-<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/process.png" width="80%" />
+<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/logic.png" width="80%" />
 
 ##### 实现功能（按页面操作流程顺序）
 
@@ -73,15 +73,14 @@ https://zhangtsh5.github.io/team/dist
 
 
 # 本地运行
-- 克隆至本地 git clone
-- 安装依赖 npm install
-- 启动服务端 
-
- - 切换目录至服务端 cd server
+- 1、克隆至本地 git clone
+- 2、安装客户端依赖 npm install
+- 3、服务端 
+  3.1、切换目录至服务端 cd server
+  3.2、安装服务端依赖 npm install
+  3.3、启动服务端 node app.js
  
- - 运行 node app.js
- 
-- 运行 npm run dev
+- 4、返回运行team目录，运行npm run dev
  
 
 
