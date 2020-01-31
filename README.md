@@ -74,13 +74,13 @@ https://zhangtsh5.github.io/team/dist
 
 # 本地运行
 - 1、克隆至本地 git clone
-- 2、安装客户端依赖 npm install
-- 3、服务端 <br />
-  3.1、切换目录至服务端 cd server <br />
-  3.2、安装服务端依赖 npm install <br />
-  3.3、启动服务端 node app.js <br />
+- 2、运行服务端 <br />
+  2.1、切换目录至服务端 cd server <br />
+  2.2、安装服务端依赖 npm install <br />
+  2.3、启动服务端 node app.js <br />
  
-- 4、返回运行team目录，运行npm run dev
- 
+- 3、返回team目录 <br />
+  3.1、安装客户端依赖 npm install <br />
+  3.2、运行项目 npm run dev <br />
 
 
