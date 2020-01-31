@@ -43,7 +43,7 @@
 # 页面逻辑交互
 联系具体实际后，实现以下功能，流程如下：
 
-<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/process.png" width="80%" />
+<img src="https://github.com/zhangtsh5/team/blob/master/src/assets/pages/logic.png" width="80%" />
 
 ##### 规则说明
 
