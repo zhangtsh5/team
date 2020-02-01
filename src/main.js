@@ -15,19 +15,24 @@ Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 
-// 登陆拦截
-// router.beforeEach((to, from, next) => {
-//     if (to.path === '/') {
-//         sessionStorage.removeItem('user')
-//     }
-//     let user = JSON.parse(sessionStorage.getItem('user'))
-//     console.log(user)
-//     if (!user && to.path !== '/') {
-//         next({path: '/'})
-//     } else {
-//         next()
-//     }
-// })
+router.beforeEach((to, from, next) => {
+    if (to.meta.requireAuth) { // 判断该路由是否需要登录权限
+        if (sessionStorage.getItem('token') === 'true') { // 判断本地是否存在token
+            next()
+        } else {
+            // 未登录,跳转到登陆页面
+            next({
+                path: '/'
+            })
+        }
+    } else {
+        if (sessionStorage.getItem('token') === 'true') {
+            next('/tasks')
+        } else {
+            next()
+        }
+    }
+})
 
 /* eslint-disable no-new */
 new Vue({

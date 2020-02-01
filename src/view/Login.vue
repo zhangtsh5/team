@@ -75,6 +75,7 @@
                     if (res.data.code === 0) {
                         // 登录成功 保存当前登录名
                         sessionStorage.setItem('username', obj.username)
+                        sessionStorage.setItem('token', 'true')
 
                         const msg = res.data.msg || '登录成功!!!'
                         this.messageFunc('success', msg)
