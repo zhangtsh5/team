@@ -41,9 +41,10 @@
 - 用户登录：只有注册过的用户，并且输入正确的密码才能登录，密码错误等弹框提示
 
 <div style="display:flex;align-items:center">
- <img src="./src/assets/pages/login.jpg" height="250px" />
- <img src="./src/assets/pages/tasks.jpg" height="250px" />
- <img src="./src/assets/pages/taskPass.jpg" height="250px" />
+ <img src="./src/assets/pages/login.jpg" height="200px" />
+ <img src="./src/assets/pages/tasks.jpg" height="200px" />
+ <img src="./src/assets/pages/taskPass.jpg" height="200px" />
+ <img src="./src/assets/pages/rule.jpg" height="200px" />
 </div>
 
 - 登录拦截：未登录状态，直接打开其它链接（如首页，项目列表页），将自动跳到登录页面
