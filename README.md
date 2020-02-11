@@ -41,15 +41,20 @@
 - 用户登录：只有注册过的用户，并且输入正确的密码才能登录，密码错误等弹框提示
 
 <div style="display:flex;align-items:center">
- <img src="./src/assets/pages/login.jpg" height="200px" />
- <img src="./src/assets/pages/tasks.jpg" height="200px" />
- <img src="./src/assets/pages/taskPass.jpg" height="200px" />
- <img src="./src/assets/pages/rule.jpg" height="200px" />
+ <img src="./src/assets/pages/login.jpg" height="300px" />
+ <img src="./src/assets/pages/tasks.jpg" height="300px" />
+
 </div>
 
 - 登录拦截：未登录状态，直接打开其它链接（如首页，项目列表页），将自动跳到登录页面
 - 选择项目：输入项目密码才可以进入该项目进行组队等操作，密码错误等弹框提示，成功登录跳转到首页
 - 首页展示：展示当前登录用户名（要求注册时以学号为用户名，即用户名为学号），展示当前项目，另外提供三个子菜单，分别是新建小组，小组列表，我的小组
+
+<div style="display:flex;align-items:center">
+ <img src="./src/assets/pages/taskPass.jpg" height="300px" />
+ <img src="./src/assets/pages/rule.jpg" height="300px" />
+</div>
+
 - 新建小组：点击新建小组，填写相关表单信息，提交，可以自己创建一支队伍，默认创建者为本小组组长；同一个项目下，同一个人只能建立一支队伍，即同一个项目下，一个学生只能存在于一个小组
 - 小组列表：展示了当前项目的组队情况，如果学生不想自己新建一个小组，也可以在小组列表中选择自己想要加入的小组，自行联系小组组长，获取到该小组密码，点击加入小组按钮，输入姓名学号和小组密码，即可成功加入该小组。也可以由组长在我的小组页面，点击添加组员，输入新添加的组员姓名学号，进行添加
 
