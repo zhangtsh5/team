@@ -42,6 +42,7 @@
 
 <div style="display:flex;align-items:center">
  <img src="./src/assets/pages/login.jpg" height="300px" />
+ <img src="./src/assets/pages/regist.jpg" height="300px" />
  <img src="./src/assets/pages/tasks.jpg" height="300px" />
 
 </div>
